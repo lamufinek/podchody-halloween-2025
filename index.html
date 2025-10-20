@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Podchody</title>
+  <style>
+    body { font-family: sans-serif; padding: 2em; background-color: #fdf6e3; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <h1>🔍 Wpisz hasło, by odkryć podpowiedź</h1>
+  <input type="password" id="password" placeholder="Wpisz hasło">
+  <button onclick="checkPassword()">Sprawdź</button>
+  <p id="hint" class="hidden">🎁 Podpowiedź: Spójrz pod największym kamieniem przy brzozie!</p>
+
+  <script>
+    function checkPassword() {
+      const correct = "dynia2025"; // ← tu wpisz swoje hasło
+      const input = document.getElementById("password").value;
+      const hint = document.getElementById("hint");
+      if (input === correct) {
+        hint.classList.remove("hidden");
+      } else {
+        alert("Niepoprawne hasło. Spróbuj ponownie!");
+      }
+    }
+  </script>
+</body>
+</html>
