@@ -1,28 +1,83 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
   <title>Podchody</title>
   <style>
-    body { font-family: sans-serif; padding: 2em; background-color: #fdf6e3; }
-    .hidden { display: none; }
+    body {
+      font-family: sans-serif;
+      background-color: #fff8e1;
+      padding: 2em;
+      text-align: center;
+    }
+    input {
+      margin: 0.5em;
+      padding: 0.5em;
+    }
+    button {
+      padding: 0.5em 1em;
+    }
+    .hidden {
+      display: none;
+    }
+    #ghost {
+      font-size: 4em;
+      margin-top: 1em;
+    }
   </style>
 </head>
 <body>
-  <h1>🔍 Wpisz hasło, by odkryć podpowiedź</h1>
-  <input type="password" id="password" placeholder="Wpisz hasło">
-  <button onclick="checkPassword()">Sprawdź</button>
-  <p id="hint" class="hidden">🎁 Podpowiedź: Spójrz pod największym kamieniem przy brzozie!</p>
+  <h1>🎃 Podchody – Odszyfruj hasła!</h1>
+
+  <div>
+    <p>Hasło 1:</p>
+    <input type="password" id="pass1" placeholder="Wpisz hasło">
+    <button onclick="checkPassword(1)">Sprawdź</button>
+  </div>
+
+  <div>
+    <p>Hasło 2:</p>
+    <input type="password" id="pass2" placeholder="Wpisz hasło">
+    <button onclick="checkPassword(2)">Sprawdź</button>
+  </div>
+
+  <div>
+    <p>Hasło 3:</p>
+    <input type="password" id="pass3" placeholder="Wpisz hasło">
+    <button onclick="checkPassword(3)">Sprawdź</button>
+  </div>
+
+  <div id="finalHint" class="hidden">
+    <div id="ghost">👻</div>
+    <h2>Podpowiedź: rozbij figurki!</h2>
+  </div>
 
   <script>
-    function checkPassword() {
-      const correct = "dynia2025"; // ← tu wpisz swoje hasło
-      const input = document.getElementById("password").value;
-      const hint = document.getElementById("hint");
-      if (input === correct) {
-        hint.classList.remove("hidden");
+    const correctPasswords = {
+      1: "duch",
+      2: "żmija",
+      3: "wampir"
+    };
+
+    const status = {
+      1: false,
+      2: false,
+      3: false
+    };
+
+    function checkPassword(num) {
+      const input = document.getElementById(`pass${num}`).value.trim().toLowerCase();
+      if (input === correctPasswords[num]) {
+        status[num] = true;
+        alert("Hasło poprawne!");
+        document.getElementById(`pass${num}`).disabled = true;
       } else {
-        alert("Niepoprawne hasło. Spróbuj ponownie!");
+        alert("Niepoprawne hasło.");
+      }
+
+      if (status[1] && status[2] && status[3]) {
+        document.getElementById("finalHint").classList.remove("hidden");
       }
     }
   </script>
